@@ -1,0 +1,6 @@
+{
+    "User": true,
+    "Task": true,
+    "Status": true,
+    "Auth": true
+}
