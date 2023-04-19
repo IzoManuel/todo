@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Status\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,12 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/status', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/statuses', [StatusController::class, 'index']);
+    Route::post('/statuses', [StatusController::class, 'store']);
+    Route::get('/statuses/{id}', [StatusController::class, 'show']);
+    Route::post('/statuses/{id}', [StatusController::class, 'update']);
+    Route::delete('/statuses/{id}', [StatusController::class, 'destroy']);
 });

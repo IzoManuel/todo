@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Task\Http\Controllers\TaskUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,16 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/task', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::post('/tasks', [TaskController::class, 'store']);
+    Route::get('/tasks/{id}', [TaskController::class, 'show']);
+    Route::post('/tasks/{id}', [TaskController::class, 'update']);
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
+
+    Route::post('/tasks/{id}/assign', [TaskUserController::class, 'assignTask']);
+    Route::post('/tasks/{id}/unassign', [TaskUserController::class, 'unassignTask']);
+    Route::post('/tasks/{id}/updateassigned', [TaskUserController::class, 'updateAssignedTask']);
 });
