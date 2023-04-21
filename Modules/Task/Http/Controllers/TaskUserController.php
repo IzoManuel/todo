@@ -9,8 +9,12 @@ use Modules\Task\Http\Requests\AssignTaskRequest;
 use Modules\Task\Http\Requests\UnassignTaskRequest;
 use Modules\Task\Http\Requests\UpdateAssignedTaskRequest;
 use Modules\User\Entities\User;
+use Modules\Task\Entities\Task;
 use Illuminate\Http\JsonResponse;
 use Modules\Task\Entities\TaskUser;
+use Modules\User\Transformers\UserResource;
+use Illuminate\Support\Arr;
+
 
 class TaskUserController extends BaseController
 {
@@ -77,5 +81,16 @@ class TaskUserController extends BaseController
             ]);
 
         return $this->sendResponse(null,'Assigned task updated');
+    }
+
+    public function assignees($id)
+    {
+        $assignees = Task::find($id)->users->map(function($value, $key){
+            if(!$value->pivot->deleted_at){
+                return $value;
+            }
+        })->filter();
+
+        return UserResource::collection($assignees);
     }
 }

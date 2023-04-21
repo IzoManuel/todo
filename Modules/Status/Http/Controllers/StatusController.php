@@ -35,9 +35,6 @@ class StatusController extends BaseController
     {
         $status = Status::create([
             'name' => $request->name,
-            'description' => $request->description,
-            'due_date' => $request->dueDate,
-            'status_id' => $request->statusId
         ]);
         
         return $this->sendResponse(null,'Status creation successful');
@@ -67,9 +64,6 @@ class StatusController extends BaseController
 
         $status->update([
             'name' => $request->name,
-            'description' => $request->description,
-            'due_date' => $request->dueDate,
-            'status_id' => $request->statusId
         ]);
 
         return $this->sendResponse(null,'Status update successful');

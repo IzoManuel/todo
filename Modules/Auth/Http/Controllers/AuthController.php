@@ -28,8 +28,7 @@ class AuthController extends BaseController
             return $this->sendResponse($success, 'User signed in');
         } else {
             return $this->sendError('Wrong Email and Password commbination', [
-                    'email' => ['Something went Wrong'],
-                    'password' => ['Something went Wrong'],
+                    'email' => ['Wrong Email and Password commbination'],
             ], 401);
         }
     }

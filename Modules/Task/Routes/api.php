@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Task\Http\Controllers\TaskUserController;
+use Modules\Task\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tasks/{id}/assign', [TaskUserController::class, 'assignTask']);
     Route::post('/tasks/{id}/unassign', [TaskUserController::class, 'unassignTask']);
     Route::post('/tasks/{id}/updateassigned', [TaskUserController::class, 'updateAssignedTask']);
+    Route::get('/tasks/{id}/assignees', [TaskUserController::class, 'assignees']);
 });

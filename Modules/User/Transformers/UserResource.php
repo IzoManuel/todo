@@ -1,11 +1,13 @@
 <?php
 
-namespace Modules\Task\Transformers;
+namespace Modules\User\Transformers;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\User\Entities\User;
+use Modules\Task\Transformers\TaskResource;
 
-class TaskResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -17,12 +19,8 @@ class TaskResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'due_date' => $this->due_date,
-            'status_id' => $this->status_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'email' => $this->email,
+            'tasks' => TaskResource::collection($this->tasks),
         ];
     }
 }

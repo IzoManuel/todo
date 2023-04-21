@@ -5,16 +5,22 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\User\Entities\User;
+use Modules\User\Transformers\UserResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Renderable
+     * @return ResourceCollection
      */
-    public function index()
+    public function index()//: ResourceCollection
     {
-        return view('user::index');
+        $users = User::paginate(10);
+
+        return UserResource::collection($users);
+        //return User::first()->tasks;
     }
 
     /**

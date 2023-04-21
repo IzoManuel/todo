@@ -34,6 +34,8 @@ class Task extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+        ->withPivot('due_date', 'start_time', 'end_time', 'remarks',
+        'status_id','created_at','updated_at', 'id', 'deleted_at');
     }
 }
